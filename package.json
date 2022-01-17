@@ -1,9 +1,9 @@
 {
-  "name": "com.ATH.inventoy-system",
+  "name": "com.ath.inventoy-system",
   "version": "0.0.1",
   "displayName": "Inventory System",
   "description": "A package that provides a simple inventory system.",
-  "unity": "2021.2.1f",
+  "unity": "2021.2",
  "keywords": [
     "Inventory"
   ],
