@@ -1,0 +1,15 @@
+{
+  "name": "com.ATH.inventoy-system",
+  "version": "0.0.1",
+  "displayName": "Inventory System",
+  "description": "A package that provides a simple inventory system.",
+  "unity": "2021.2.1f",
+ "keywords": [
+    "Inventory"
+  ],
+  "author": {
+    "name": "Tudurean Iulian",
+    "email": "tudurean.iulian@gmail.com",
+    "url": "https://github.com/Atheros21"
+  }
+}
