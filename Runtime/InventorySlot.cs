@@ -57,7 +57,10 @@ namespace ATH.InventorySystem
         /// <returns>The amount of an item that can be added to this slot.</returns>
         public int GetFreeSpace(Item item)
         {
-            return _item == null ? item.StackLimit : item.StackLimit - _amount;
+            if (_item == null) return item.StackLimit;
+            if (_item != item) return 0;
+
+            return item.StackLimit - _amount;
         }
 
         /// <summary>
@@ -112,6 +115,11 @@ namespace ATH.InventorySystem
         {
             _item = null;
             _amount = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"Item: {Item}, Amont {Amount}";
         }
     }
 }

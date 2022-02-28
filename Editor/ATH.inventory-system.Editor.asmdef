@@ -1,0 +1,16 @@
+{
+    "name": "ATH.inventory-system.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1b5f820501806a54ebeab71cb74df4ee"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

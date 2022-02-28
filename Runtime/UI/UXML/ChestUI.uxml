@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="SlotContainerUI" src="project://database/Assets/_Project/Scripts/InventorySystem/Runtime/UI/UXML/SlotContainerUI.uxml?fileID=9197481963319205126&amp;guid=dc1a9c195b22eee4b8a1ced32fad9755&amp;type=3#SlotContainerUI" />
+    <ui:VisualElement style="-unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(144, 144, 144); width: 320px; height: 350px; justify-content: flex-start; transform-origin: left bottom; translate: 50% 50%;">
+        <ui:VisualElement name="Header" style="height: 25px; background-color: rgb(114, 114, 114); flex-direction: row; justify-content: space-between;">
+            <ui:Label text="Chest inventory" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
+            <ui:Button text="X" display-tooltip-when-elided="true" name="CloseChestPanel" style="height: 23px; width: 23px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Slots" style="align-items: center; height: 135px; flex-direction: column; flex-wrap: wrap; display: flex; opacity: 1; justify-content: space-between; padding-top: 10px;">
+            <ui:VisualElement name="Row" style="flex-direction: row; width: 98%; justify-content: space-between;">
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" style="flex-wrap: wrap; flex-direction: row-reverse; justify-content: flex-start; align-items: stretch;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Row" style="flex-direction: row; width: 98%; justify-content: space-between;">
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" />
+                <ui:Instance template="SlotContainerUI" name="SlotContainerUI" style="flex-wrap: wrap; flex-direction: row-reverse; justify-content: flex-start; align-items: stretch;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
