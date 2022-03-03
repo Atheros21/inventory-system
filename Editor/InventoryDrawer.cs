@@ -1,25 +1,20 @@
 using UnityEngine.UIElements;
-using UnityEditor;
 
 namespace ATH.InventorySystem
 {
     public class InventoryDrawer
     {
-        private const string kInventoryDrawerPath = "Assets/_Project/Scripts/InventorySystem/Editor/UXML/General/InventoryDrawer.uxml";
-        private const string kInventorySlotDrawerPath = "Assets/_Project/Scripts/InventorySystem/Editor/UXML/General/InventorySlotDrawer.uxml";
-
         private VisualTreeAsset _inventoryVisualTreeAsset;
         private VisualTreeAsset _inventorySlotTreeAsset;
         private Inventory _inventory;
         private VisualElement _root;
-        private bool _usingExistingElement;
 
         public VisualElement Root => _root;
 
         public InventoryDrawer(Inventory inventory)
         {
-            _inventoryVisualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(kInventoryDrawerPath);
-            _inventorySlotTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(kInventorySlotDrawerPath);
+            _inventoryVisualTreeAsset = UXMLSet.GetUxmlSetInstance().Inventory;
+            _inventorySlotTreeAsset = UXMLSet.GetUxmlSetInstance().InventorySlot;
             _inventory = inventory;
             CreateNewRoot();
 
@@ -29,10 +24,9 @@ namespace ATH.InventorySystem
 
         public InventoryDrawer(Inventory inventory, VisualElement extisingDrawer)
         {
-            _inventorySlotTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(kInventorySlotDrawerPath);
+            _inventorySlotTreeAsset = UXMLSet.GetUxmlSetInstance().InventorySlot;
             _inventory = inventory;
             _root = extisingDrawer;
-            _usingExistingElement = true;
             UpdateVisuals(_root);
         }
 

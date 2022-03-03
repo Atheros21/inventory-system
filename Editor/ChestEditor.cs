@@ -8,8 +8,6 @@ namespace ATH.InventorySystem
     [CustomEditor(typeof(Chest))]
     public class ChestEditor : Editor
     {
-        private const string kVisualTreePath = "Assets/_Project/Scripts/InventorySystem/Editor/UXML/Chest.uxml";
-
         private Chest _chest;
         private VisualElement _root;
         private VisualTreeAsset _rootTreeAsset;
@@ -24,7 +22,7 @@ namespace ATH.InventorySystem
             _chest = (Chest)target;
             _root = new VisualElement();
             _inventoryDrawer = new InventoryDrawer(_chest.Inventory);
-            _rootTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(kVisualTreePath);
+            _rootTreeAsset = UXMLSet.GetUxmlSetInstance().Chest;
         }
 
         public override VisualElement CreateInspectorGUI()
@@ -37,6 +35,7 @@ namespace ATH.InventorySystem
                 _chest.ResetInventory();
                 _inventoryDrawer = new InventoryDrawer(_chest.Inventory);
                 _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
+                EditorUtility.SetDirty(_chest);
             };
 
             root.Q<Button>("add-item").clicked += AddItem;
@@ -63,6 +62,7 @@ namespace ATH.InventorySystem
 
             _chest.Inventory.SetGold(_goldField.value);
             _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
+            EditorUtility.SetDirty(_chest);
         }
 
         private void AddItem()
@@ -89,6 +89,7 @@ namespace ATH.InventorySystem
 
             _chest.Inventory.AddItem(item, 1);
             _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
+            EditorUtility.SetDirty(_chest);
         }
 
         private void RemoveItem()
@@ -115,6 +116,7 @@ namespace ATH.InventorySystem
 
             _chest.Inventory.RemoveItem(item, 1);
             _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
+            EditorUtility.SetDirty(_chest);
         }
     }
 }
