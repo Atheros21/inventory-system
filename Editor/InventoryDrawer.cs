@@ -18,8 +18,8 @@ namespace ATH.InventorySystem
             _inventory = inventory;
             CreateNewRoot();
 
-            if (inventory != null)
-                _inventory.OnItemUpdate.AddListener(CreateNewRoot);
+            //if (inventory != null)
+                //_inventory.OnItemUpdate.AddListener(CreateNewRoot);
         }
 
         public InventoryDrawer(Inventory inventory, VisualElement extisingDrawer)
@@ -55,10 +55,10 @@ namespace ATH.InventorySystem
             {
                 var slotElement = new VisualElement();
                 _inventorySlotTreeAsset.CloneTree(slotElement);
-                var item = slotData.Item;
+                var item = slotData.Entry.Item;
 
                 slotElement.Q<Label>("Name").text = item != null ? item.ItemName : "None";
-                slotElement.Q<Label>("Amount").text = item != null ? $"{slotData.Amount}/{item.StackLimit}" : "-/-";
+                slotElement.Q<Label>("Amount").text = item != null ? $"{slotData.Entry.Amount}/{item.StackLimit}" : "-/-";
 
                 var style = slotElement.Q<Button>("Icon").style.backgroundImage.value;
                 style.sprite = item != null ? item.ItemIcon : null;
