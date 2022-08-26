@@ -1,4 +1,8 @@
+using System;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 namespace ATH.InventorySystem
 {
@@ -8,25 +12,23 @@ namespace ATH.InventorySystem
         private VisualTreeAsset _inventorySlotTreeAsset;
         private Inventory _inventory;
         private VisualElement _root;
+        private VisualElement _nullContainer;
+        private VisualElement _validContainer;
+        private Action<Inventory> _newInventoryCreated;
+        private UnityEngine.Object _target;
+        private SerializedObject _serializedObject;
 
         public VisualElement Root => _root;
 
-        public InventoryDrawer(Inventory inventory)
+        public InventoryDrawer(Inventory inventory, Action<Inventory> newInventoryCreated, UnityEngine.Object target, SerializedObject serializedObject)
         {
             _inventoryVisualTreeAsset = UXMLSet.GetUxmlSetInstance().Inventory;
             _inventorySlotTreeAsset = UXMLSet.GetUxmlSetInstance().InventorySlot;
             _inventory = inventory;
+            _newInventoryCreated = newInventoryCreated;
+            _target = target;
+            _serializedObject = serializedObject;
             CreateNewRoot();
-
-            //if (inventory != null)
-                //_inventory.OnItemUpdate.AddListener(CreateNewRoot);
-        }
-
-        public InventoryDrawer(Inventory inventory, VisualElement extisingDrawer)
-        {
-            _inventorySlotTreeAsset = UXMLSet.GetUxmlSetInstance().InventorySlot;
-            _inventory = inventory;
-            _root = extisingDrawer;
             UpdateVisuals(_root);
         }
 
@@ -41,13 +43,28 @@ namespace ATH.InventorySystem
 
         public void UpdateVisuals(VisualElement root)
         {
+            _validContainer = root.Q<VisualElement>("ValidInventory");
+            _nullContainer = root.Q<VisualElement>("NullInventory");
+          
             if (_inventory == null)
             {
-                root.Q<Label>("gold").text = "Null inventory";
+                _nullContainer.style.display = DisplayStyle.Flex;
+                _validContainer.style.display = DisplayStyle.None;
+                var createBtn = _nullContainer.Q<Button>("CreateInventory");
+                createBtn.clicked -= CreateBtn;
+                createBtn.clicked += CreateBtn;
                 return;
             }
 
-            root.Q<Label>("gold").text = $"Gold: {_inventory.Gold}";
+            _nullContainer.style.display = DisplayStyle.None;
+            _validContainer.style.display = DisplayStyle.Flex;
+
+            var goldInput = _validContainer.Q<IntegerField>("Gold");
+            goldInput.SetValueWithoutNotify(_inventory.Gold);
+            goldInput.UnregisterCallback<ChangeEvent<int>>(ChangeGold);
+            goldInput.RegisterCallback<ChangeEvent<int>>(ChangeGold);
+
+            return;
 
             var slots = root.Q<Foldout>("slots");
             slots.Clear();
@@ -66,6 +83,27 @@ namespace ATH.InventorySystem
 
                 slots.Add(slotElement);
             }
+        }
+
+        private void CreateBtn()
+        {
+            if (_nullContainer == null) return;
+
+            var inventory = new Inventory(_nullContainer.Q<IntegerField>("Width").value, _nullContainer.Q<IntegerField>("Height").value);
+            _newInventoryCreated?.Invoke(inventory);
+            _inventory = inventory;
+            UpdateVisuals(_root);
+            _serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(_target);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        }
+
+        private void ChangeGold(ChangeEvent<int> args)
+        {
+            _inventory.SetGold(args.newValue);
+            _serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(_target);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
     }
 }

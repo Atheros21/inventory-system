@@ -19,7 +19,8 @@ namespace ATH.InventorySystem.DevelopTests
         [SerializeField] private Button _addItem2;
         [SerializeField] private Button _removeItem1;
 
-        private Inventory _debugInventory;
+        [SerializeField] private Inventory _debugInventory;
+
         private void Awake()
         {
             _openInventory.onClick.AddListener(OpenInventory);

@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/inventory-system/Editor/UXML&amp;USS/General/InventroySystemStyles.uss?fileID=7433441132597879392&amp;guid=abad209b994964b4f9190e64400befb8&amp;type=3#InventroySystemStyles" />
+    <ui:VisualElement>
+        <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Title" style="-unity-font-style: bold; margin-left: 5px; font-size: 16px;" />
+        <ui:VisualElement name="Separator" style="height: 2px; background-color: rgb(210, 210, 210);" />
+        <ui:VisualElement name="NullInventory" style="display: flex;">
+            <ui:Label tabindex="-1" text="Inventory is null" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; color: rgb(255, 0, 0);" />
+            <ui:Label tabindex="-1" text="Slots grid:" display-tooltip-when-elided="true" style="-unity-text-align: upper-left; color: rgb(255, 255, 255); height: 15px;" />
+            <ui:VisualElement style="flex-direction: row; align-items: auto; justify-content: space-between;">
+                <ui:IntegerField label="Width" value="1" name="Width" style="flex-direction: column;" />
+                <ui:IntegerField label="Width" value="1" name="Height" style="flex-direction: column;" />
+            </ui:VisualElement>
+            <ui:Button tabindex="-1" text="Create Inventory" display-tooltip-when-elided="true" name="CreateInventory" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ValidInventory" style="display: none;">
+            <ui:IntegerField label="Gold" value="0" name="Gold" />
+            <ui:VisualElement name="Container" style="flex-grow: 1; justify-content: space-around; flex-direction: row; flex-wrap: wrap;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

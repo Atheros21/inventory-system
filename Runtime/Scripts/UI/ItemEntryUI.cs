@@ -10,6 +10,7 @@ namespace ATH.InventorySystem.UI
         [SerializeField] private TextMeshProUGUI _amount;
         [SerializeField] private Image _itemIcon;
 
+        private Canvas _canvasWhileDragging;
         private Canvas _canvas;
         private RectTransform _rectTransform;
 
@@ -21,6 +22,11 @@ namespace ATH.InventorySystem.UI
         public void SetParentCanvas(Canvas canvas)
         {
             _canvas = canvas;
+        }
+
+        public void SetCanvasWhileDragging(Canvas canvas)
+        {
+            _canvasWhileDragging = canvas;
         }
 
         public void UpdateEntry(ItemEntry itemEntry)

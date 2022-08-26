@@ -9,7 +9,13 @@ namespace ATH.InventorySystem
     {
         private Inventory _inventory;
 
-        public Inventory Inventory => _inventory;
+        public Inventory Inventory { get => _inventory; set { _inventory = value; } }
+
+        [ContextMenu("Log Gold")]
+        public void LogGold()
+        {
+            Debug.Log(_inventory.Gold);
+        }
 
         public void ResetInventory()
         {

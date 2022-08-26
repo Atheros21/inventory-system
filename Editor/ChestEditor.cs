@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using UnityEditor.SceneManagement;
 
 namespace ATH.InventorySystem
 {
@@ -21,34 +22,35 @@ namespace ATH.InventorySystem
         {
             _chest = (Chest)target;
             _root = new VisualElement();
-            _inventoryDrawer = new InventoryDrawer(_chest.Inventory);
+            _inventoryDrawer = new InventoryDrawer(_chest.Inventory, (ctx) => _chest.Inventory = ctx, _chest, serializedObject);
             _rootTreeAsset = UXMLSet.GetUxmlSetInstance().Chest;
         }
 
         public override VisualElement CreateInspectorGUI()
         {
+            serializedObject.Update();
             var root = _root;
             root.Clear();
             _rootTreeAsset.CloneTree(root);
-            root.Q<Button>("reset").clicked += () =>
-            {
-                _chest.ResetInventory();
-                _inventoryDrawer = new InventoryDrawer(_chest.Inventory);
-                _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
-                EditorUtility.SetDirty(_chest);
-            };
+            //root.Q<Button>("reset").clicked += () =>
+            //{
+            //    _chest.ResetInventory();
+            //    _inventoryDrawer = new InventoryDrawer(_chest.Inventory);
+            //    _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
+            //    EditorUtility.SetDirty(_chest);
+            //};
 
-            root.Q<Button>("add-item").clicked += AddItem;
-            root.Q<Button>("remove-item").clicked += RemoveItem;
-            root.Q<Button>("change-gold").clicked += ChagneGold;
+            //root.Q<Button>("add-item").clicked += AddItem;
+            //root.Q<Button>("remove-item").clicked += RemoveItem;
+            //root.Q<Button>("change-gold").clicked += ChagneGold;
 
-            _itemAddField = root.Q<ObjectField>("item-add-field");
-            _itemRemoveField = root.Q<ObjectField>("item-remove-field");
-            _goldField = root.Q<IntegerField>("gold-value");
+            //_itemAddField = root.Q<ObjectField>("item-add-field");
+            //_itemRemoveField = root.Q<ObjectField>("item-remove-field");
+            //_goldField = root.Q<IntegerField>("gold-value");
             _inventoryDrawerRoot = root.Q<VisualElement>("inventory-drawer");
 
             _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
-
+            serializedObject.ApplyModifiedProperties();
             return root;
         }
 
@@ -63,6 +65,7 @@ namespace ATH.InventorySystem
             _chest.Inventory.SetGold(_goldField.value);
             _inventoryDrawer.UpdateVisuals(_inventoryDrawerRoot);
             EditorUtility.SetDirty(_chest);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
 
         private void AddItem()

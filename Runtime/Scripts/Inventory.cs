@@ -10,6 +10,7 @@ namespace ATH.InventorySystem
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
     public class Inventory
     {
         private const int kDefaultWitdh = 4;

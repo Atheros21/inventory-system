@@ -12,6 +12,7 @@ namespace ATH.InventorySystem.UI
         [SerializeField] private InventorySlotUI _inventorySlotPrefab;
         [Header("Refrences")]
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private Canvas _canvasWhileDragging;
         [SerializeField] private TextMeshProUGUI _coins;
         [SerializeField] private Button _close;
         [SerializeField] private Transform _slotsContainer;
@@ -48,7 +49,7 @@ namespace ATH.InventorySystem.UI
             for (int i = 0; i < _inventory.Slots.Count; i++)
             {
                 var slotClone = Instantiate(_inventorySlotPrefab, _slotsContainer);
-                slotClone.Bind(_inventory.Slots[i], _canvas);
+                slotClone.Bind(_inventory.Slots[i], _canvas, _canvasWhileDragging);
                 slotClone.Redraw();
                 _instantiatedSlots.Add(_inventory.Slots[i].GetHashCode(), slotClone);
             }
