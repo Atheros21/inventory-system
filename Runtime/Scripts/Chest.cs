@@ -5,11 +5,16 @@ namespace ATH.InventorySystem
     /// <summary>
     /// TODO
     /// </summary>
-    public class Chest : MonoBehaviour
+    public class Chest : MonoBehaviour, IInventoryHolder
     {
+        [SerializeField]
         private Inventory _inventory;
 
-        public Inventory Inventory { get => _inventory; set { _inventory = value; } }
+        public Inventory Inventory
+        {
+            get => _inventory;
+            set => _inventory = value;
+        }
 
         [ContextMenu("Log Gold")]
         public void LogGold()

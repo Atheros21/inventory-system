@@ -2,6 +2,7 @@ using System;
 
 namespace ATH.InventorySystem
 {
+    [Serializable]
     public class InventorySlot
     {
         public InventoySlotState State;

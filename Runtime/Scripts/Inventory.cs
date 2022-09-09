@@ -17,15 +17,12 @@ namespace ATH.InventorySystem
         private const int kDefaultHeight = 4;
 
         [SerializeField] private int _gold;
+        [SerializeField] private InventorySlot[,] _slotsMatrix;
 
-        private List<InventorySlot> _slots;
-        private InventorySlot[,] _slotsMatrix;
+        [SerializeField] private List<InventorySlot> _slots;
 
-        private int _witdh;
-        private int _height;
-
-        public int Width => _witdh;
-        public int Height => _height;
+        public int Width => _slotsMatrix.GetLength(0);
+        public int Height => _slotsMatrix.GetLength(1);
 
         /// <summary>
         /// Gets the gold amount from the inventory.
@@ -40,6 +37,7 @@ namespace ATH.InventorySystem
         /// <summary>
         /// Event invoked when the gold ammount from this inventory is changed.
         /// </summary>
+        [Space(10)]
         public UnityEvent OnGoldUpdate = new UnityEvent();
 
         /// <summary>
@@ -70,8 +68,6 @@ namespace ATH.InventorySystem
                     _slotsMatrix[i, j] = slot;
                 }
             }
-            _height = kDefaultHeight;
-            _witdh = kDefaultWitdh;
         }
 
         /// <summary>
@@ -91,8 +87,6 @@ namespace ATH.InventorySystem
                     _slotsMatrix[i, j] = slot;
                 }
             }
-            _witdh = width;
-            _height = height;
         }
 
         /// <summary>
@@ -114,8 +108,6 @@ namespace ATH.InventorySystem
                     _slotsMatrix[i, j] = slot;
                 }
             }
-            _witdh = width;
-            _height = height;
         }
 
         /// <summary>

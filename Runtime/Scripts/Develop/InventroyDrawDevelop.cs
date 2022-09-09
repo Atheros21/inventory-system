@@ -1,13 +1,15 @@
 using UnityEngine;
 using ATH.InventorySystem.UI;
 using UnityEngine.UI;
+using UnityEditor;
 
 namespace ATH.InventorySystem.DevelopTests
 {
     public class InventroyDrawDevelop : MonoBehaviour
     {
         [SerializeField] private Item _item1;
-        [SerializeField] private Item _item2;
+        [SerializeField] private Item _item;
+        [SerializeField] private ItemEntry _item2;
 
         [SerializeField] private InventoryUI _inventoryUI;
 
@@ -33,6 +35,8 @@ namespace ATH.InventorySystem.DevelopTests
 
         private void OpenInventory()
         {
+            _inventoryUI.SetInventory(_debugInventory);
+            _inventoryUI.Draw();
             _inventoryUI.Open();
         }
 
@@ -67,7 +71,7 @@ namespace ATH.InventorySystem.DevelopTests
 
         private void AddItem2()
         {
-            _debugInventory.AddItem(_item2, 1);
+            _debugInventory.AddItem(_item, 1);
         }
 
         private void RemoveItem()

@@ -21,7 +21,6 @@ namespace ATH.InventorySystem.UI
         private Inventory _inventory;
         private Dictionary<int, InventorySlotUI> _instantiatedSlots;
 
-
         private void Awake()
         {
             _instantiatedSlots = new Dictionary<int, InventorySlotUI>();

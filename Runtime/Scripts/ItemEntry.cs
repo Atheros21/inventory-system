@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 
 namespace ATH.InventorySystem
 {
@@ -10,31 +11,30 @@ namespace ATH.InventorySystem
     [Serializable]
     public class ItemEntry
     {
-        private Item _item;
-        private int _amount;
-
         /// <summary>
         /// The item from the entry
         /// </summary>
-        public Item Item => _item;
+        [ShowInInspector]
+        public Item Item {get; set;}
 
         /// <summary>
         /// The ammount of the item from the entry
         /// </summary>
-        public int Amount => _amount;
+        [ShowInInspector]
+        public int Amount { get; set; }
 
         /// <summary>
         /// Gets if the item entry is empty
         /// </summary>
-        public bool IsEmpty => _amount == 0 || _item == null;
+        public bool IsEmpty => Amount == 0 || Item == null;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         public ItemEntry()
         {
-            _amount = 0;
-            _item = null;
+            Amount = 0;
+            Item = null;
         }
 
         /// <summary>
@@ -44,23 +44,23 @@ namespace ATH.InventorySystem
         {
             if (amount <= 0 || item == null)
             {
-                _amount = 0;
-                _item = null;
+                Amount = 0;
+                Item = null;
                 return;
             }
 
-            _item = item;
-            _amount = amount;
+            Item = item;
+            Amount = amount;
         }
 
         /// <param name="item">The item that will be checked for free space.</param>
         /// <returns>The amount of an item that can be added to this entry.</returns>
         public int GetFreeSpace(Item item)
         {
-            if (_item == null) return item.StackLimit;
-            if (_item != item) return 0;
+            if (Item == null) return item.StackLimit;
+            if (Item != item) return 0;
 
-            return item.StackLimit - _amount;
+            return item.StackLimit - Amount;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace ATH.InventorySystem
         /// <param name="amount">The amount of item to be added to the entry</param>
         public void IncreaseAmount(Item item, int amount)
         {
-            if (_item == null)
+            if (Item == null)
             {
-                _item = item;
+                Item = item;
             }
 
             if (amount < 0 || amount > GetFreeSpace(item))
@@ -81,12 +81,12 @@ namespace ATH.InventorySystem
                 throw new ArgumentException("Failed to increase the amount for an item, the amount is negative or is larger than the item entry capacity");
             }
 
-            if (_item != item)
+            if (Item != item)
             {
                 throw new ArgumentException("Tried to increase a item entry with an item that is diffrent than the one that is currently in it");
             }
 
-            _amount += amount;
+            Amount += amount;
         }
 
         /// <summary>
@@ -95,16 +95,16 @@ namespace ATH.InventorySystem
         /// <param name="amount">The amount of item to be removed from entry</param>
         public void DecreaseAmount(int amount)
         {
-            if (amount < 0 || amount > _amount || IsEmpty)
+            if (amount < 0 || amount > Amount || IsEmpty)
             {
                 throw new ArgumentException("Failed to decrease amount fon an item, the amount is negative, too large or item entry is empty");
             }
 
-            _amount -= amount;
+            Amount -= amount;
 
-            if (_amount <= 0)
+            if (Amount <= 0)
             {
-                _item = null;
+                Item = null;
             }
         }
 

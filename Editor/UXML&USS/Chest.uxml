@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <ui:Template name="InventoryDrawer" src="project://database/Assets/inventory-system/Editor/UXML&amp;USS/General/InventoryDrawer.uxml?fileID=9197481963319205126&amp;guid=7066e6f0b3f6d794bbdf7ec5800c54af&amp;type=3#InventoryDrawer" />
-    <ui:Instance template="InventoryDrawer" name="inventory-drawer" />
-</ui:UXML>
