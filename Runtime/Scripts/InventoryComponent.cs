@@ -5,7 +5,7 @@ namespace ATH.InventorySystem
     /// <summary>
     /// TODO
     /// </summary>
-    public class Chest : MonoBehaviour, IInventoryHolder
+    public class InventoryComponent : MonoBehaviour, IInventoryHolder
     {
         [SerializeField]
         private Inventory _inventory;

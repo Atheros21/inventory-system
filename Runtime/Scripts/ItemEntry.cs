@@ -1,5 +1,5 @@
 ﻿using System;
-using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace ATH.InventorySystem
 {
@@ -14,14 +14,12 @@ namespace ATH.InventorySystem
         /// <summary>
         /// The item from the entry
         /// </summary>
-        [ShowInInspector]
-        public Item Item {get; set;}
+        [field: SerializeField] public Item Item { get; set; }
 
         /// <summary>
         /// The ammount of the item from the entry
         /// </summary>
-        [ShowInInspector]
-        public int Amount { get; set; }
+        [field: SerializeField] public int Amount { get; set; }
 
         /// <summary>
         /// Gets if the item entry is empty

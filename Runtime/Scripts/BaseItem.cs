@@ -1,9 +1,9 @@
 using UnityEngine;
+
 namespace ATH.InventorySystem
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(menuName = "ATH/InventorySystem/BaseItem")]
     public class BaseItem : Item
-    {
-    }
+    { }
 
 }
